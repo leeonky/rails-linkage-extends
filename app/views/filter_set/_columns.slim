@@ -1,0 +1,5 @@
+.inline-block.linkage-cols-select condition_name='#{builder.main_key}' table_name='#{key}'
+  = builder.caption caption, clazz: caption_class
+  = builder.hidden_field '__all_cols'
+  - all_cols = JSON((builder.builder.object.__all_cols||'[]')).select(&:present?)
+  = builder.select "__cols", all_cols, {}, multiple: :multiple, **options

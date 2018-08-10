@@ -1,0 +1,4 @@
+zh-CN:
+  filter_set:
+    columns:
+      default: '显示列'
