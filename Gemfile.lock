@@ -1,13 +1,6 @@
-PATH
-  remote: .
-  specs:
-    rails-linkage-extends (0.1.0)
-      filter_set
-      rails-linkage
-      uri-js-rails
-
-PATH
-  remote: /share/filter_set
+GIT
+  remote: https://github.com/leeonky/filter_set.git
+  revision: 327cc54d40023a7326fad09bc42f5e7b925dc2b2
   specs:
     filter_set (0.0.1)
       font-awesome-rails
@@ -17,13 +10,25 @@ PATH
       sass-rails
       slim-rails
 
-PATH
-  remote: /share/rails-linkage
+GIT
+  remote: https://github.com/leeonky/rails-linkage.git
+  revision: aaee861459d68943584f1b7a5066a4c2dbaef674
   specs:
     rails-linkage (0.1.0)
       jquery-rails
       rails (>= 4.2.10)
       sass-rails
+
+PATH
+  remote: .
+  specs:
+    rails-linkage-extends (0.1.0)
+      filter_set
+      jquery-rails
+      rails (>= 4.2.10)
+      rails-linkage
+      sass-rails
+      uri-js-rails
 
 GEM
   remote: https://rubygems.org/
