@@ -8,12 +8,18 @@ $(document).ready ->
     table = $('*[data-linkage-cols-trigger='+name+']')
 
     if($(cols_e).find("##{filter_name}___all_cols").val()=='')
-      cols = $(table).find('th:not(.no-linkage)').map ->
+      not_shown = {}
+      cols = $(table).find('th:not(.linkage-ignore)').map ->
+        if $(this).is('.linkage-invisible')
+          not_shown[$(this).text()] = true
         $(this).text()
       $(cols_e).find("##{filter_name}___all_cols").val(JSON.stringify(cols.get()))
 
       cols.each ->
-        $("##{filter_name}___cols").append('<option selected value="'+this+'">'+this+'</option>')
+        if not_shown[this]
+          $("##{filter_name}___cols").append('<option value="'+this+'">'+this+'</option>')
+        else
+          $("##{filter_name}___cols").append('<option selected value="'+this+'">'+this+'</option>')
 
     $(table).addClass('table-linkage-cols')
     table.attr('data-linkage', JSON.stringify({triggers: {selector: "##{filter_name}___cols", matcher: 'text'}}))
