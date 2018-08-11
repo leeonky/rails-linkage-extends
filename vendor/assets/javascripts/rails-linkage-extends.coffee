@@ -9,7 +9,13 @@ $(document).ready ->
 
     if($(cols_e).find("##{filter_name}___all_cols").val()=='')
       not_shown = {}
-      cols = $(table).find('th:not(.linkage-ignore)').map ->
+
+      all_cols = if $(table).is('[data-linkage-cols-headers]')
+        $(table).find($(table).attr('data-linkage-cols-headers'))
+      else
+        $(table).find('tr').first().find('th,td')
+
+      cols = all_cols.filter(':not(.linkage-ignore)').map ->
         if $(this).is('.linkage-invisible')
           not_shown[$(this).text()] = true
         $(this).text()
@@ -22,7 +28,13 @@ $(document).ready ->
           $("##{filter_name}___cols").append('<option selected value="'+this+'">'+this+'</option>')
 
     $(table).addClass('table-linkage-cols')
-    table.attr('data-linkage', JSON.stringify({triggers: {selector: "##{filter_name}___cols", matcher: 'text'}}))
+    linkages = {triggers: {selector: "##{filter_name}___cols", matcher: 'text'}}
+    if $(table).is('[data-linkage-cols-headers]')
+      Object.assign(linkages, {headers: $(table).attr('data-linkage-cols-headers')})
+    if $(table).is('[data-linkage-cols-cells]')
+      Object.assign(linkages, {headers: $(table).attr('data-linkage-cols-cells')})
+
+    table.attr('data-linkage', JSON.stringify(linkages))
     $(document).trigger('bind.linkage', table[0])
 
     $("##{filter_name}___cols").on 'change', ()->

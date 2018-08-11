@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/leeonky/rails-linkage.git
-  revision: aaee861459d68943584f1b7a5066a4c2dbaef674
+  revision: 3140c7a0bc7de33d6c662bbb162d71d498a94aea
   specs:
     rails-linkage (0.1.0)
       jquery-rails
